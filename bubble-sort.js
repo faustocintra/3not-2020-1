@@ -10,9 +10,6 @@ function troca(vet, i, j) {
    vet[j] = aux
 }
 
-//let nums = [8, 5, 7, 3, 1, 9, 4, 0, 2, 6]
-let nums = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-
 let trocas, comps, pass
 
 function bubbleSort(vet) {
@@ -34,17 +31,22 @@ function bubbleSort(vet) {
    } while(trocou) // Se houve troca (trocou == true), precisa passar de novo
 }
 
-let nomes = require('./amostras/dez-mil-nomes')
+//let nums = [8, 5, 7, 3, 1, 9, 4, 0, 2, 6]
+let nums = [7, 3, 9, 6, 4, 0, 2, 5, 1, 8]
 
-//console.log(nums)
-console.log(nomes)
+console.log(nums)
+//console.log(nomes)
+
+let nomes = require('./amostras/dez-mil-nomes')
 
 trocas = 0
 comps = 0
 pass = 0
 
+console.time('bubblesort')
 //bubbleSort(nums)
 bubbleSort(nomes)
+console.timeEnd('bubblesort')
 
 console.log(`Comparações: ${comps}; trocas: ${trocas}; passadas: ${pass}`)
 

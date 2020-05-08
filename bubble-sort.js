@@ -34,10 +34,10 @@ function bubbleSort(vet) {
 //let nums = [8, 5, 7, 3, 1, 9, 4, 0, 2, 6]
 let nums = [7, 3, 9, 6, 4, 0, 2, 5, 1, 8]
 
-console.log(nums)
+//console.log(nums)
 //console.log(nomes)
 
-let nomes = require('./amostras/dez-mil-nomes')
+let nomes = require('./amostras/cem-mil-nomes')
 
 trocas = 0
 comps = 0

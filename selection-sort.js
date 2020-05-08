@@ -48,7 +48,7 @@ selectionSort(nums)
 console.log(nums)
 console.log(estat) */
 
-let nomes = require('./amostras/dez-mil-nomes')
+let nomes = require('./amostras/cem-mil-nomes')
 
 estat = { comps: 0, trocas: 0, pass: 0}
 

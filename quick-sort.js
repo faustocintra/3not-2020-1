@@ -6,7 +6,7 @@ function troca(vet, i, j) {
    vet[j] = aux
 }
 
-function quickSort(vet, posIni = 0, posFim = vet.length - 1) {
+function quickSort(vet, fnComp, posIni = 0, posFim = vet.length - 1) {
    pass++
    
    // Só processa se houver mais de um elemento no vetor
@@ -27,7 +27,18 @@ function quickSort(vet, posIni = 0, posFim = vet.length - 1) {
          // posições i e div entre si
          
          comps++
-         if(vet[i] < vet[posPivot]) {
+         //if(vet[i] < vet[posPivot]) {
+         
+         /*
+            COMPARAÇÃO USANDO FUNÇÃO PERSONALIZADA
+            fnComp() é uma função que deverá ser informada ao
+            chamar o algoritmo quickSort().
+            Essa função recebe dois argumentos, e deve retornar
+            true caso o primeiro argumento seja MAIOR que o segundo
+            e false caso contrário.
+         */
+         
+         if(fnComp(vet[posPivot], vet[i])) {
             posDiv++
             troca(vet, i, posDiv)
             trocas++
@@ -41,10 +52,10 @@ function quickSort(vet, posIni = 0, posFim = vet.length - 1) {
       troca(vet, posDiv, posPivot)
 
       // Subvetor à esquerda
-      quickSort(vet, posIni, posDiv - 1)
+      quickSort(vet, fnComp, posIni, posDiv - 1)
 
       // Subvetor à direita
-      quickSort(vet, posDiv + 1, posFim)
+      quickSort(vet, fnComp, posDiv + 1, posFim)
    }
 }
 
@@ -53,7 +64,7 @@ let letras = ['j', 'i', 'h', 'g', 'f', 'e', 'd', 'c', 'b', 'a']
 
 let nomes = require('./amostras/cem-mil-nomes')
 
-comps = 0
+/* comps = 0
 pass = 0
 trocas = 0
 //quickSort(letras)
@@ -64,4 +75,43 @@ console.timeEnd('quick-sort')
 
 console.log({comps, pass, trocas})
 //console.log(letras)
-console.log(nomes)
+console.log(nomes) */
+
+let pessoas = [
+   { codigo: 5, nome: 'GERALDO GOMES', idade: 63, sexo: 'M' },
+   { codigo: 2, nome: 'PAULA PIRES', idade: 35, sexo: 'F' },
+   { codigo: 6, nome: 'JULIANA JUNQUEIRA', idade: 20, sexo: 'F' },
+   { codigo: 1, nome: 'CARLOS CARDOSO', idade: 44, sexo: 'M' },
+   { codigo: 4, nome: 'LUÍS LIMA', idade: 51, sexo: 'M' },
+   { codigo: 3, nome: 'RITA RODRIGUES', idade: 15, sexo: 'F' }
+]
+
+function comparaCodigo(a, b) {
+   return a.codigo > b.codigo
+}
+
+function comparaNome(x, y) {
+   return x.nome > y.nome
+}
+
+function comparaSexoNome(a, b) {
+   if(a.sexo == b.sexo) return a.nome > b.nome
+   return a.sexo > b.sexo
+}
+
+//quickSort(pessoas, comparaCodigo)
+//quickSort(pessoas, comparaNome)
+
+// Ordenação por idade usando arrow function
+// quickSort(pessoas, (a, b) => a.idade > b.idade)
+
+// Ordenação por idade EM ORDEM DESCENDENTE usando arrow function
+// (basta inverter o sinal de comparação)
+quickSort(pessoas, (a, b) => a.idade < b.idade)
+
+// Ordenação por sexo usando arrow function
+//quickSort(pessoas, (a, b) => a.sexo > b.sexo)
+
+//quickSort(pessoas, comparaSexoNome)
+
+console.log(pessoas)

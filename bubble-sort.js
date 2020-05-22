@@ -12,7 +12,7 @@ function troca(vet, i, j) {
 
 let trocas, comps, pass
 
-function bubbleSort(vet) {
+function bubbleSort(vet, fnComp) {
    let trocou
    do {
       pass++ // Incrementa passadas
@@ -22,7 +22,8 @@ function bubbleSort(vet) {
       // será comparado com seu sucessor
       for(let i = 0; i < vet.length - 1; i++) {
          comps++ // Incrementa comparações
-         if(vet[i + 1] < vet[i]) {
+         //if(vet[i + 1] < vet[i]) {  // Ou: vet[i] > vet[i + 1]
+         if(fnComp(vet[i], vet[i + 1])) {
             troca(vet, i, i + 1)
             trocou = true
             trocas++ // Incrementa trocas
@@ -31,13 +32,22 @@ function bubbleSort(vet) {
    } while(trocou) // Se houve troca (trocou == true), precisa passar de novo
 }
 
-//let nums = [8, 5, 7, 3, 1, 9, 4, 0, 2, 6]
+/* //let nums = [8, 5, 7, 3, 1, 9, 4, 0, 2, 6]
 let nums = [7, 3, 9, 6, 4, 0, 2, 5, 1, 8]
+
+function comparaNums(x, y) {
+   return x > y
+}
+
+// bubbleSort(nums, comparaNums)
+bubbleSort(nums, (x, y) => x > y)
+
+console.log(nums) */
 
 //console.log(nums)
 //console.log(nomes)
 
-let nomes = require('./amostras/cem-mil-nomes')
+/* let nomes = require('./amostras/cem-mil-nomes')
 
 trocas = 0
 comps = 0
@@ -51,6 +61,21 @@ console.timeEnd('bubblesort')
 console.log(`Comparações: ${comps}; trocas: ${trocas}; passadas: ${pass}`)
 
 //console.log(nums)
-console.log(nomes)
+console.log(nomes) */
+
+const covid = require('./amostras/covid19')
+
+// Filtrando apenas os dados do dia 2020-05-15
+const covid1505 = covid.filter(e => e.date == "2020-05-15")
+
+//bubbleSort(covid1505, (a, b) => a.city > b.city)
+bubbleSort(covid1505, (a, b) => a.last_available_confirmed < b.last_available_confirmed)
+
+//console.log(covid1505)
+
+// Mostrar os 20 primeiros
+for(let i = 1; i <= 20; i++) {
+   console.log(covid1505[i])
+}
 
 
